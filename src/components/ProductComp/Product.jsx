@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -10,9 +11,24 @@ import Typography from "@mui/material/Typography";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 const Product = (props) => {
+  const navigate = useNavigate();
+
+  const openProduct = (id) => {
+    navigate("/ProductDetails/" + id);
+  };
+  const returnDescription = (data) => {
+    return data.substr(0, 200);
+  };
+
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+      <Card
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <CardMedia
           component="img"
           sx={{
@@ -27,7 +43,7 @@ const Product = (props) => {
             {props.data.title}
           </Typography>
           <Typography varaint="body1" gutterBottom>
-            {props.data.description}
+            {returnDescription(props.data.description)}
           </Typography>
         </CardContent>
         <CardActions>
@@ -36,7 +52,14 @@ const Product = (props) => {
               <AttachMoneyIcon />
               {props.data.price}
             </Button>
-            <Button variant="outlined" color="success" size="small">
+            <Button
+              variant="outlined"
+              color="success"
+              size="small"
+              onClick={() => {
+                openProduct(props.data.id);
+              }}
+            >
               Add
             </Button>
           </Box>
