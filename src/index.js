@@ -6,6 +6,7 @@ import App from "./App";
 import NoPage from "./components/NoPage";
 import ProductDetails from "./components/ProductComp/ProductDetails";
 import Product from "./components/ProductComp/Product";
+import Cart from "./components/ProductComp/Cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,6 +15,7 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/Product" element={<Product />} />
       <Route path="/ProductDetails/:id" element={<ProductDetails />} />
+      <Route path="/Cart" element={<Cart />} />
       <Route path="*" element={<NoPage />} />
     </Routes>
   </BrowserRouter>

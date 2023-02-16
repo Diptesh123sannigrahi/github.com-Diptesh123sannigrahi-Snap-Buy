@@ -1,9 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const Navbar = (props) => {
+  const navigate = useNavigate();
+
+  const openHome = () => {
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: "#41c7f0" }}>
@@ -13,9 +20,18 @@ const Navbar = (props) => {
             variant="h6"
             align="left"
             component="h1"
-            sx={{ flexGrow: 1, color: "#222625" }}
+            sx={{ flexGrow: 1 }}
           >
-            Snap-Buy
+            <Button
+              variant="text"
+              size="large"
+              sx={{ flexGrow: 1, color: "#222625" }}
+              onClick={() => {
+                openHome();
+              }}
+            >
+              Snap-Buy
+            </Button>
           </Typography>
           <Button
             variant="contained"

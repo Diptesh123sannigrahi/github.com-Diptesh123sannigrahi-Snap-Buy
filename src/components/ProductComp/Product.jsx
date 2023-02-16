@@ -21,7 +21,7 @@ const Product = (props) => {
   };
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={8} md={4}>
       <Card
         sx={{
           height: "100%",
@@ -33,7 +33,7 @@ const Product = (props) => {
           component="img"
           sx={{
             // 16:9
-            pt: "56.25%",
+            pt: "30.25%",
           }}
           image={props.data.image}
           alt={props.data.title}
@@ -42,13 +42,13 @@ const Product = (props) => {
           <Typography gutterBottom variant="h5" component="h2">
             {props.data.title}
           </Typography>
-          <Typography varaint="body1" gutterBottom>
+          <Typography variant="body2" gutterBottom>
             {returnDescription(props.data.description)}
           </Typography>
         </CardContent>
         <CardActions>
           <Box sx={{ flexGrow: 1 }}>
-            <Button varaint="text" size="small">
+            <Button variant="text" size="small">
               <AttachMoneyIcon />
               {props.data.price}
             </Button>

@@ -2,13 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Product from "./ProductComp/Product";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import { Grid, Box, Container } from "@mui/material";
 import "./Products.css";
 
 const Products = () => {
   const [post, setPost] = useState(() => {
+    return [];
+  });
+
+  const [counter, setCounter] = useState(() => {
     return [];
   });
 
@@ -27,6 +29,15 @@ const Products = () => {
         alert(error.message);
       });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("items") === null) {
+      localStorage.setItem("items", JSON.stringify(counter));
+      setCounter(counter);
+    } else {
+      setCounter(JSON.parse(localStorage.getItem("items")));
+    }
+  }, [counter]);
 
   useEffect(() => {
     getData();
@@ -66,7 +77,7 @@ const Products = () => {
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
         {/* End hero unit */}
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {newPost.map((data) => (
             <Product key={data.id} data={data} />
           ))}

@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./Description.css";
@@ -26,6 +29,27 @@ function getLabelText(value) {
 }
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
+
+  const openCart = (code, title, price) => {
+    const data = JSON.parse(localStorage.getItem("items"));
+    console.log(data);
+    const item = {
+      id: code.toString(),
+      name: title,
+      cost: parseInt(price),
+      value: parseInt(1),
+    };
+    const hasData = data.filter((c) => c.id === code.toString());
+    if (hasData.length === 0) {
+      data.push(item);
+      localStorage.setItem("items", JSON.stringify(data));
+      navigate("/Cart");
+    } else {
+      alert("Item already existes in cart");
+      navigate("/Cart");
+    }
+  };
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
   let params = useParams();
@@ -55,40 +79,53 @@ const ProductDetails = () => {
   });
 
   return (
-    <div className="details">
-      <div className="big-img">
-        <img src={post.image} alt={post.title} />
-      </div>
-
-      <div className="box">
-        <div className="row">
-          <h2>{post.title}</h2>
-          <Button varaint="text" size="large" sx={{ flexGrow: 1 }}>
-            <AttachMoneyIcon />
-            {post.price}
-          </Button>
+    <React.Fragment>
+      <Navbar />
+      <div className="details">
+        <div className="big-img">
+          <img src={post.image} alt={post.title} />
         </div>
-        <Rating
-          name="hover-feedback"
-          value={value}
-          precision={0.5}
-          getLabelText={getLabelText}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          onChangeActive={(event, newHover) => {
-            setHover(newHover);
-          }}
-          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-        />
-        {value !== null && (
-          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-        )}
-        <Typography variant="h5">{post.category}</Typography>
-        <Typography variant="body2">{post.description}</Typography>
-        <button className="cart">Add to cart</button>
+
+        <div className="box">
+          <div className="row">
+            <h2>{post.title}</h2>
+            <Button varaint="text" size="large" sx={{ flexGrow: 1 }}>
+              <AttachMoneyIcon />
+              {post.price}
+            </Button>
+          </div>
+          <Rating
+            name="hover-feedback"
+            value={value}
+            precision={0.5}
+            getLabelText={getLabelText}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            onChangeActive={(event, newHover) => {
+              setHover(newHover);
+            }}
+            emptyIcon={
+              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+            }
+          />
+          {value !== null && (
+            <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+          )}
+          <Typography variant="h5">{post.category}</Typography>
+          <Typography variant="body2">{post.description}</Typography>
+          <button
+            className="cart"
+            onClick={() => {
+              openCart(post.id, post.title, post.price);
+            }}
+          >
+            Add to cart
+          </button>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 
