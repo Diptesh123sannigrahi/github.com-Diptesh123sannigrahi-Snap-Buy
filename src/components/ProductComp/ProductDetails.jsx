@@ -84,7 +84,7 @@ const ProductDetails = () => {
     const name = params.id.toString();
     const rate = localStorage.getItem(name);
     setValue(parseInt(rate));
-  });
+  }, [params.id]);
 
   if (!post) return null;
 
