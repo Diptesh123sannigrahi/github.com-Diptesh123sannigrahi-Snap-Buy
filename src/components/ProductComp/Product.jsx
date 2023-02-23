@@ -29,15 +29,14 @@ const Product = (props) => {
           flexDirection: "column",
         }}
       >
-        <CardMedia
-          component="img"
-          sx={{
-            // 16:9
-            pt: "30.25%",
-          }}
-          image={props.data.image}
-          alt={props.data.title}
-        />
+        <CardMedia>
+          <img
+            src={props.data.image}
+            alt={props.data.title}
+            width="200"
+            height="170"
+          />
+        </CardMedia>
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography gutterBottom variant="h5" component="h2">
             {props.data.title}

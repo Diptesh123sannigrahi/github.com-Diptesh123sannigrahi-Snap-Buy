@@ -42,7 +42,7 @@ const Products = () => {
   useEffect(() => {
     getData();
     console.log(post);
-  });
+  }, [post]);
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -77,7 +77,7 @@ const Products = () => {
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
         {/* End hero unit */}
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{ mb: 3 }}>
           {newPost.map((data) => (
             <Product key={data.id} data={data} />
           ))}

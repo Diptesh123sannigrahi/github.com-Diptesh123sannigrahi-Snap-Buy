@@ -1,43 +1,46 @@
-import React, { useEffect, useRef } from "react";
-import { Box, Typography } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const theme = createTheme();
+import React from "react";
+import { Box, Typography, Paper, Container } from "@mui/material";
 
 const Footer = (props) => {
-  const ref = useRef(null);
-  const f = props.onF;
-
-  useEffect(() => {
-    console.log(f);
-    if (f === true) {
-      ref.current.focus();
-    }
-  }, [f]);
-
   return (
-    <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-          bgcolor: "#f8f9fa",
-          p: 6,
-        }}
-        component="footer"
-      >
-        <Typography ref={ref} variant="h6" align="center" gutterBottom>
-          About Us
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
+    <Paper
+      sx={{
+        bgcolor: "#f8f9fa",
+        marginTop: "calc(10% + 60px)",
+        width: "100%",
+        position: "fixed",
+        bottom: 0,
+      }}
+      component="footer"
+      square
+      variant="outlined"
+    >
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            flexGrow: 1,
+            justifyContent: "center",
+            display: "flex",
+            my: 1,
+          }}
         >
-          Always you gonna find your febs here...
-        </Typography>
-      </Box>
-    </ThemeProvider>
+          <Typography variant="subtitle2">SNAP-BUY</Typography>
+        </Box>
+
+        <Box
+          sx={{
+            flexGrow: 1,
+            justifyContent: "center",
+            display: "flex",
+            mb: 2,
+          }}
+        >
+          <Typography variant="caption" color="initial">
+            Copyright ©2023. [] Limited
+          </Typography>
+        </Box>
+      </Container>
+    </Paper>
   );
 };
 

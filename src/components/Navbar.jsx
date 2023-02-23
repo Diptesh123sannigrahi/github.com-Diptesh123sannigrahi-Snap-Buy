@@ -11,6 +11,14 @@ const Navbar = (props) => {
     navigate("/");
   };
 
+  const clickOnCart = () => {
+    navigate("/cart");
+  };
+
+  const clickOnAbout = () => {
+    navigate("/about");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: "#41c7f0" }}>
@@ -38,12 +46,18 @@ const Navbar = (props) => {
             size="small"
             sx={{ bgcolor: "#41c7f0", color: "#ffff" }}
             onClick={() => {
-              props.clickOnBtn();
+              clickOnAbout();
             }}
           >
             About
           </Button>
-          <Button href="" variant="icon" size="small">
+          <Button
+            variant="icon"
+            size="small"
+            onClick={() => {
+              clickOnCart();
+            }}
+          >
             <ShoppingBagIcon sx={{ color: "#ffffff" }} />
           </Button>
         </Toolbar>

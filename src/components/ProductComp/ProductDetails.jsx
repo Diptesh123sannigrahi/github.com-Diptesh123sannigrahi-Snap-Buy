@@ -31,13 +31,15 @@ function getLabelText(value) {
 const ProductDetails = () => {
   const navigate = useNavigate();
 
-  const openCart = (code, title, price) => {
+  const openCart = (code, title, price, img) => {
     const data = JSON.parse(localStorage.getItem("items"));
     console.log(data);
     const item = {
       id: code.toString(),
       name: title,
       cost: parseInt(price),
+      totalCost: parseInt(price),
+      image: img,
       value: parseInt(1),
     };
     const hasData = data.filter((c) => c.id === code.toString());
@@ -50,9 +52,9 @@ const ProductDetails = () => {
       navigate("/Cart");
     }
   };
-  const [value, setValue] = React.useState(2);
-  const [hover, setHover] = React.useState(-1);
   let params = useParams();
+  const [value, setValue] = React.useState(-1);
+  const [hover, setHover] = React.useState(-1);
   const [post, setPost] = useState(() => {
     return [];
   });
@@ -78,6 +80,14 @@ const ProductDetails = () => {
     getData();
   });
 
+  useEffect(() => {
+    const name = params.id.toString();
+    const rate = localStorage.getItem(name);
+    setValue(parseInt(rate));
+  });
+
+  if (!post) return null;
+
   return (
     <React.Fragment>
       <Navbar />
@@ -100,7 +110,17 @@ const ProductDetails = () => {
             precision={0.5}
             getLabelText={getLabelText}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              const name = params.id.toString();
+              const rate = localStorage.getItem(name);
+              console.log(rate);
+              if (rate === null || rate === "-1") {
+                localStorage.setItem(name, newValue);
+                setValue(newValue);
+              } else {
+                localStorage.removeItem(name);
+                localStorage.setItem(name, newValue);
+                setValue(newValue);
+              }
             }}
             onChangeActive={(event, newHover) => {
               setHover(newHover);
@@ -112,12 +132,18 @@ const ProductDetails = () => {
           {value !== null && (
             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
           )}
-          <Typography variant="h5">{post.category}</Typography>
+          <Typography variant="h5" sx={{ display: "inline" }}>
+            Type:{" "}
+          </Typography>
+          <Typography variant="h6" sx={{ display: "inline" }}>
+            {post.category}
+          </Typography>
+
           <Typography variant="body2">{post.description}</Typography>
           <button
             className="cart"
             onClick={() => {
-              openCart(post.id, post.title, post.price);
+              openCart(post.id, post.title, post.price, post.image);
             }}
           >
             Add to cart

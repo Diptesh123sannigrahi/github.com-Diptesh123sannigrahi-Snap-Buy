@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import Counters from "./counters";
+import CartDetails from "./CartDetails";
 
 const Cart = () => {
   return (
     <div>
       <Navbar />
-      <Counters />
+      <CartDetails />
       <Footer />
     </div>
   );
