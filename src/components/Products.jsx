@@ -41,7 +41,7 @@ const Products = () => {
 
   useEffect(() => {
     getData();
-    console.log(post);
+    //console.log(post);
   }, [post]);
 
   const handleChange = (e) => {
