@@ -4,7 +4,7 @@ import { Typography, Button, Grid, Divider, Box } from "@mui/material";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
-const Counters = () => {
+const CartDetails = () => {
   const [counter, setCounter] = useState(() => {
     return [];
   });
@@ -94,7 +94,7 @@ const Counters = () => {
         {counter.map((counter) => (
           <Grid item>
             <CartItem
-              key={counter.id}
+              key={counter.id.toString()}
               onIncrement={handleIncrement}
               onDecrement={handleDecrement}
               onDelete={handleDelete}
@@ -165,4 +165,4 @@ const Counters = () => {
   );
 };
 
-export default Counters;
+export default CartDetails;

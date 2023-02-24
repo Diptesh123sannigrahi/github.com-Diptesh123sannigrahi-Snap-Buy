@@ -59,7 +59,7 @@ const Product = (props) => {
                 openProduct(props.data.id);
               }}
             >
-              Add
+              View
             </Button>
           </Box>
         </CardActions>

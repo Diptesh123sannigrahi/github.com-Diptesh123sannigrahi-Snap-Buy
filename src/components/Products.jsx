@@ -37,12 +37,9 @@ const Products = () => {
     } else {
       setCounter(JSON.parse(localStorage.getItem("items")));
     }
-  }, [counter]);
-
-  useEffect(() => {
     getData();
-    //console.log(post);
-  }, [post]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (e) => {
     setSearch(e.target.value);

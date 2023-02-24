@@ -34,16 +34,16 @@ const ProductDetails = () => {
   const openCart = (code, title, price, img) => {
     const data = JSON.parse(localStorage.getItem("items"));
     console.log(data);
-    const item = {
-      id: code.toString(),
-      name: title,
-      cost: parseInt(price),
-      totalCost: parseInt(price),
-      image: img,
-      value: parseInt(1),
-    };
     const hasData = data.filter((c) => c.id === code.toString());
     if (hasData.length === 0) {
+      const item = {
+        id: code.toString(),
+        name: title,
+        cost: parseInt(price),
+        totalCost: parseInt(price),
+        image: img,
+        value: parseInt(1),
+      };
       data.push(item);
       localStorage.setItem("items", JSON.stringify(data));
       navigate("/Cart");
@@ -78,12 +78,10 @@ const ProductDetails = () => {
 
   useEffect(() => {
     getData();
-  });
-
-  useEffect(() => {
     const name = params.id.toString();
     const rate = localStorage.getItem(name);
     setValue(parseInt(rate));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   if (!post) return null;

@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
-const Counter = (props) => {
+const CartItem = (props) => {
   // constructor() {
   //     super();
   //     this.handleIncrement = this.handleIncrement.bind(this);
@@ -86,4 +86,4 @@ const Counter = (props) => {
   );
 };
 
-export default Counter;
+export default CartItem;
