@@ -82,7 +82,7 @@ const ProductDetails = () => {
     const rate = localStorage.getItem(name);
     setValue(parseInt(rate));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.id]);
+  }, []);
 
   if (!post) return null;
 
