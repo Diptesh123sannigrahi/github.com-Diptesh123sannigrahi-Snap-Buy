@@ -92,9 +92,8 @@ const CartDetails = () => {
         alignItems="stretch"
       >
         {counter.map((counter) => (
-          <Grid item>
+          <Grid item key={counter.id}>
             <CartItem
-              key={counter.id.toString()}
               onIncrement={handleIncrement}
               onDecrement={handleDecrement}
               onDelete={handleDelete}
